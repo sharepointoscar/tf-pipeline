@@ -24,14 +24,19 @@ variable "repository_name" {
   default     = "skiapp"
 }
 
+variable "github_token" {
+  description = "A Github token with permissions for creating webhooks"
+  type        = string
+}
+
 variable "static_web_bucket_name" {
   description = "S3 Bucket to deploy to"
-  default     = "static-web-example-bucket"
+  default     = "cw2-static-web-example-bucket"
 }
 
 variable "artifacts_bucket_name" {
   description = "S3 Bucket for storing artifacts"
-  default     = "artifacts-bucket"
+  default     = "cw2-artifacts-bucket"
 }
 
 variable "pipeline_name" {

@@ -16,10 +16,12 @@ resource "aws_codepipeline" "static_web_pipeline" {
     action {
       category = "Source"
       configuration = {
-        "Branch"               = var.repository_branch
-        "Owner"                = var.repository_owner
-        "PollForSourceChanges" = "false"
-        "Repo"                 = var.repository_name
+        Branch               = var.repository_branch
+        Owner                = var.repository_owner
+        OAuthToken           = var.github_token
+        PollForSourceChanges = "false"
+        Repo                 = var.repository_name
+
       }
       input_artifacts = []
       name            = "Source"
@@ -30,6 +32,7 @@ resource "aws_codepipeline" "static_web_pipeline" {
       provider  = "GitHub"
       run_order = 1
       version   = "1"
+
     }
   }
   stage {

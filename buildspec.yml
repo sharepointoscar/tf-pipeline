@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    NODE_ENV: "${env}"
+    NODE_ENV: "dev"
 
 phases:
   install:
@@ -22,7 +22,7 @@ phases:
 artifacts:
   files:
     - "**/*"
-  name: "web-dist-${env}"
+  name: "web-dist-dev"
   base-directory: build
 
 cache:

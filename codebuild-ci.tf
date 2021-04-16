@@ -10,14 +10,14 @@ resource "aws_codebuild_project" "static_web_build" {
   build_timeout  = 60
   name           = "static-web-build"
   queued_timeout = 480
-  service_role   = aws_iam_role.codepipeline_role.arn
+  service_role   = aws_iam_role.codebuild_assume_role.arn
   tags = {
     Environment = var.env
   }
 
   artifacts {
     encryption_disabled    = false
-    name                   = "static-web-build-${var.env}"
+    name                   = var.static_web_bucket_name
     override_artifact_name = false
     packaging              = "NONE"
     type                   = "CODEPIPELINE"

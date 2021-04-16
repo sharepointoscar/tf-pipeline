@@ -17,13 +17,13 @@ phases:
       - npm run test
   build:
     commands:
-      - npm run build
-
+      - echo "no build command for this app, and that is ok..."
+  post_build:
+    commands:
+      - echo Build completed on `date`
 artifacts:
   files:
     - "**/*"
-  name: "web-dist-dev"
-  base-directory: build
 
 cache:
   paths:

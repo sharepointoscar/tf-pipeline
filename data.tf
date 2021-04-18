@@ -42,7 +42,7 @@ data "github_repository" "repo" {
 }
 
 data "template_file" "buildspec_ci" {
-  template = "${file("buildspec.yml")}"
+  template = "${file("buildspec_ci.yml")}"
 }
 
 // data "template_file" "buildspec_deploy" {

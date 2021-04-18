@@ -1,5 +1,5 @@
 data "template_file" "buildspec" {
-  template = file("buildspec.yml")
+  template = file("buildspec_ci.yml")
   vars = {
     env          = var.env
   }

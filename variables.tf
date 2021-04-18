@@ -16,12 +16,12 @@ variable "repository_branch" {
 
 variable "repository_owner" {
   description = "GitHub repository owner"
-  default     = "jenkins-oscar"
+  default     = "sharepointoscar"
 }
 
 variable "repository_name" {
   description = "GitHub repository name"
-  default     = "skiapp"
+  default     = "tf-web"
 }
 
 variable "github_token" {

@@ -31,7 +31,9 @@ resource "aws_iam_role_policy" "attach_codepipeline_policy" {
                 "cloudwatch:*",
                 "sns:*",
                 "sqs:*",
-                "iam:PassRole"
+                "iam:PassRole",
+                "ec2:*",
+                "elasticloadbalancing:*"
             ],
             "Resource": "*",
             "Effect": "Allow"
@@ -84,13 +86,12 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         "s3:Delete*",
         "s3:Get*",
         "s3:List*",
-        "s3:Put*"
+        "s3:Put*",
+        "ec2:*",
+        "elasticloadbalancing:*"
       ],
       "Resource": [
-        "${aws_s3_bucket.artifacts-bucket.arn}",
-        "${aws_s3_bucket.artifacts-bucket.arn}/*",
-        "${aws_s3_bucket.static-web-bucket.arn}",
-        "${aws_s3_bucket.static-web-bucket.arn}/*"
+        "*"
       ],
       "Effect": "Allow"
     },

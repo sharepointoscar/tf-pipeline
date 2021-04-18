@@ -1,11 +1,11 @@
 resource "aws_iam_role" "codepipeline_role" {
-  name = "codepipeline_role-codepipeline-role"
+  name = "${var.pipeline_name}-codepipeline-role"
   assume_role_policy = data.aws_iam_policy_document.codepipeline_assume_policy.json
 }
 
 # CodePipeline policy needed to use CodeCommit and CodeBuild
 resource "aws_iam_role_policy" "attach_codepipeline_policy" {
-  name = "codepipeline_role-codepipeline-policy"
+  name = "${var.pipeline_name}-codepipeline-policy"
   role = aws_iam_role.codepipeline_role.id
 
   policy = <<EOF
@@ -19,10 +19,10 @@ resource "aws_iam_role_policy" "attach_codepipeline_policy" {
                 "s3:Delete*"
             ],
             "Resource": [
-              "${var.artifacts_bucket_name}.arn",
-              "${var.artifacts_bucket_name}.arn/*",
-              "${var.static_web_bucket_name}.arn",
-              "${var.static_web_bucket_name}.arn/*"
+              "${aws_s3_bucket.artifacts-bucket.arn}",
+              "${aws_s3_bucket.artifacts-bucket.arn}/*",
+              "${aws_s3_bucket.static-web-bucket.arn}",
+              "${aws_s3_bucket.static-web-bucket.arn}/*"
             ],
             "Effect": "Allow"
         },
@@ -31,7 +31,9 @@ resource "aws_iam_role_policy" "attach_codepipeline_policy" {
                 "cloudwatch:*",
                 "sns:*",
                 "sqs:*",
-                "iam:PassRole"
+                "iam:PassRole",
+                "ec2:*",
+                "elasticloadbalancing:*"
             ],
             "Resource": "*",
             "Effect": "Allow"
@@ -84,13 +86,12 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         "s3:Delete*",
         "s3:Get*",
         "s3:List*",
-        "s3:Put*"
+        "s3:Put*",
+        "ec2:*",
+        "elasticloadbalancing:*"
       ],
       "Resource": [
-        "${var.artifacts_bucket_name}.arn",
-        "${var.artifacts_bucket_name}.arn/*",
-        "${var.static_web_bucket_name}.arn",
-        "${var.static_web_bucket_name}.arn/*"
+        "*"
       ],
       "Effect": "Allow"
     },

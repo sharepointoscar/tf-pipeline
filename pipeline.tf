@@ -32,7 +32,6 @@ resource "aws_codepipeline" "static_web_pipeline" {
       provider  = "GitHub"
       run_order = 1
       version   = "1"
-
     }
   }
   stage {

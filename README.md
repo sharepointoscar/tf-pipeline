@@ -5,6 +5,6 @@ Any `terraform` command must include the `github_token` variable for now.
 
 # Issues
 1. IAM Policies are too permissive, need to be more granular
-2. Need to add `buildspec.yml` environment variables i.e. GithubRepo, GithubOwner etc.
+2. Need to add `buildspec_ci.yml` environment variables i.e. GithubRepo, GithubOwner, Environment etc.
 
 NOTE: Because we don't have parameters in `buildspec`, the buildspec is hardcoded to use a specific github public repo from a public organization.

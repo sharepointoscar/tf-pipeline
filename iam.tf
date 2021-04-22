@@ -88,7 +88,8 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         "s3:List*",
         "s3:Put*",
         "ec2:*",
-        "elasticloadbalancing:*"
+        "elasticloadbalancing:*",
+        "secretsmanager:*"
       ],
       "Resource": [
         "*"

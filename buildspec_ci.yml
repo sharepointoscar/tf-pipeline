@@ -1,4 +1,8 @@
 version: 0.2
+
+env:
+  secrets-manager:
+      LOCAL_SECRET_VAR: "GithubWebHook:githubhmac"
 phases:
   install:
     commands: 
@@ -7,6 +11,9 @@ phases:
       - mv terraform /bin
       - rm terraform.zip
       - aws sts get-caller-identity
+      - curl -o /bin/jq http://stedolan.github.io/jq/download/linux64/jq && chmod +x /bin/jq
+      - aws secretsmanager get-secret-value --region us-west-2 --secret-id GithubWebHook | jq -r .SecretString | jq -r .githubhmac
+      - echo printing the encrypted Secret value = $LOCAL_SECRET_VAR
   pre_build:
     commands:
       - ls
